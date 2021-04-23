@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: otus-luzhin-demo-deployment
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: otus-luzhin-demo
+  template:
+    metadata:
+      labels:
+        app: otus-luzhin-demo
+    spec:
+      containers:
+      - name: otus-luzhin-demo-app
+        image: 020196/otus-luzhin-homework-kubernetes-parttwo:1
+        ports:
+          - name: web
+            containerPort: 80
+        livenessProbe:
+          httpGet:
+            port: 80
+            path: /
+          initialDelaySeconds: 1
+          periodSeconds: 5
+          timeoutSeconds: 2
+        readinessProbe:
+          httpGet:
+            port: 80
+            path: /health
+          initialDelaySeconds: 1
+          periodSeconds: 5
+          timeoutSeconds: 2
+
