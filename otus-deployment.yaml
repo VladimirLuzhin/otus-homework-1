@@ -20,16 +20,15 @@ spec:
             containerPort: 8000
         livenessProbe:
           httpGet:
-            port: 8000
-            path: /
-          initialDelaySeconds: 1
+            port: 80
+            path: /health
+          initialDelaySeconds: 5
           periodSeconds: 5
           timeoutSeconds: 2
         readinessProbe:
           httpGet:
-            port: 8000
+            port: 80
             path: /health
-          initialDelaySeconds: 1
+          initialDelaySeconds: 5
           periodSeconds: 5
           timeoutSeconds: 2
-
